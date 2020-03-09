@@ -1,0 +1,13 @@
+C:\Users\player\Desktop\TestProject\TestProject\bin\Debug\config.ini
+C:\Users\player\Desktop\TestProject\TestProject\bin\Debug\TestProject.exe.config
+C:\Users\player\Desktop\TestProject\TestProject\bin\Debug\TestProject.exe
+C:\Users\player\Desktop\TestProject\TestProject\bin\Debug\TestProject.pdb
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.csprojAssemblyReference.cache
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.MainForm.resources
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.InputPasswordForm.resources
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.SavePasswordForm.resources
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.Properties.Resources.resources
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.csproj.GenerateResource.cache
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.exe
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.pdb
+C:\Users\player\Desktop\TestProject\TestProject\obj\Debug\TestProject.TestForm.resources
