@@ -1,6 +1,6 @@
 ﻿namespace TestProject
 {
-    partial class MainForm
+    partial class ScreenLockForm
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.

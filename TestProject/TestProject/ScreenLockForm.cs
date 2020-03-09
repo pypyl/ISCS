@@ -8,12 +8,76 @@ using System.Windows.Forms;
 namespace TestProject
 {
     /// <summary>
-    /// 메인 폼
+    /// ScreenLock 폼
     /// </summary>
-    public partial class MainForm : Form
+    public partial class ScreenLockForm : Form
     {
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Structure
-        ////////////////////////////////////////////////////////////////////////////////////////// Public
+        #region Field
+
+        /// <summary>
+        /// 키보드 후킹 처리 대리자
+        /// </summary>
+        private static ProcessKeyboardHookDelegate _processKeyboardHookDelegate = ProcessKeyboardHook;
+
+        /// <summary>
+        /// 후킹 ID
+        /// </summary>
+        private static int _hookID = 0;
+
+
+        /// <summary>
+        /// WH_KEYBOARD_LL
+        /// </summary>
+        private const int WH_KEYBOARD_LL = 13;
+
+        /// <summary>
+        /// WM_KEYDOWN
+        /// </summary>
+        private const int WM_KEYDOWN = 0x0100;
+
+        /// <summary>
+        /// WM_KEYUP
+        /// </summary>
+        private const int WM_KEYUP = 0x0101;
+
+        /// <summary>
+        /// WM_SYSKEYDOWN
+        /// </summary>
+        private const int WM_SYSKEYDOWN = 0x0104;
+
+        /// <summary>
+        /// WM_SYSKEYUP
+        /// </summary>
+        private const int WM_SYSKEYUP = 0x0105;
+
+
+        /// <summary>
+        /// 화면 사각형
+        /// </summary>
+        private Rectangle screenRectangle = Screen.PrimaryScreen.Bounds;
+
+        /// <summary>
+        /// 마우스 X 좌표
+        /// </summary>
+        private int mouseX = 0;
+
+        /// <summary>
+        /// 마우스 Y 좌표
+        /// </summary>
+        private int mouseY = 0;
+
+        /// <summary>
+        /// 스크린 세이버 중단 가능 여부
+        /// </summary>
+        private bool canStopScreenSaver = true;
+
+        /// <summary>
+        /// 난수 발생기
+        /// </summary>
+        private Random random = new Random();
+
+
+        #endregion
 
         #region 키보드 저수준 후킹 구조체 - KBDLLHOOKSTRUCT
 
@@ -128,87 +192,12 @@ namespace TestProject
         ////////////////////////////////////////////////////////////////////////////////////////// Static
         //////////////////////////////////////////////////////////////////////////////// Private
 
-        #region Field
-
-        /// <summary>
-        /// 키보드 후킹 처리 대리자
-        /// </summary>
-        private static ProcessKeyboardHookDelegate _processKeyboardHookDelegate = ProcessKeyboardHook;
-
-        /// <summary>
-        /// 후킹 ID
-        /// </summary>
-        private static int _hookID = 0;
-
-        #endregion
-
-        ////////////////////////////////////////////////////////////////////////////////////////// Instance
-        //////////////////////////////////////////////////////////////////////////////// Private
-
-        #region Field
-
-        /// <summary>
-        /// WH_KEYBOARD_LL
-        /// </summary>
-        private const int WH_KEYBOARD_LL = 13;
-
-        /// <summary>
-        /// WM_KEYDOWN
-        /// </summary>
-        private const int WM_KEYDOWN = 0x0100;
-
-        /// <summary>
-        /// WM_KEYUP
-        /// </summary>
-        private const int WM_KEYUP = 0x0101;
-
-        /// <summary>
-        /// WM_SYSKEYDOWN
-        /// </summary>
-        private const int WM_SYSKEYDOWN = 0x0104;
-
-        /// <summary>
-        /// WM_SYSKEYUP
-        /// </summary>
-        private const int WM_SYSKEYUP = 0x0105;
-
-
-        /// <summary>
-        /// 화면 사각형
-        /// </summary>
-        private Rectangle screenRectangle = Screen.PrimaryScreen.Bounds;
-
-        /// <summary>
-        /// 마우스 X 좌표
-        /// </summary>
-        private int mouseX = 0;
-
-        /// <summary>
-        /// 마우스 Y 좌표
-        /// </summary>
-        private int mouseY = 0;
-
-        /// <summary>
-        /// 스크린 세이버 중단 가능 여부
-        /// </summary>
-        private bool canStopScreenSaver = true;
-
-        /// <summary>
-        /// 난수 발생기
-        /// </summary>
-        private Random random = new Random();
-
-        #endregion
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Constructor
-        ////////////////////////////////////////////////////////////////////////////////////////// Public
-
         #region 생성자 - MainForm()
 
         /// <summary>
         /// 생성자
         /// </summary>
-        public MainForm()  
+        public ScreenLockForm()  
         {
             InitializeComponent();
 

@@ -5,14 +5,18 @@ using System.Windows.Forms;
 
 namespace TestProject
 {
-    /// <summary>
-    /// 패스워드 입력 폼
-    /// </summary>
+    ///<summary>
+    ///ScreenLock 사용 시 뜨는 패스워드 입력폼
+    ///</summary>
     public partial class InputPasswordForm : Form
     {
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Import
-        ////////////////////////////////////////////////////////////////////////////////////////// Static
-        //////////////////////////////////////////////////////////////////////////////// Private
+        #region field
+        /// <summary>
+        /// 비밀번호 
+        /// </summary>
+        private string password = null;
+
+        #endregion field
 
         #region 윈도우 후킹 해제하기 - UnhookWindowsHookEx(hookHandle)
 
@@ -20,27 +24,11 @@ namespace TestProject
         /// 윈도우 후킹 해제하기
         /// </summary>
         /// <param name="hookHandle">후킹 핸들</param>
-        /// <returns></returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool UnhookWindowsHookEx(int hookHandle);
 
-        #endregion
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Field
-        ////////////////////////////////////////////////////////////////////////////////////////// Private
-
-        #region Field
-
-        /// <summary>
-        /// 패스워드
-        /// </summary>
-        private string password = null;
-
-        #endregion
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Constructor
-        ////////////////////////////////////////////////////////////////////////////////////////// Public
+        #endregion 윈도우 후킹 해제하기 - UnhookWindowsHookEx(hookHandle)
 
         #region 생성자 - InputPasswordForm()
 
@@ -56,18 +44,13 @@ namespace TestProject
             this.cancelButton.Click += cancelButton_Click;
         }
 
-        #endregion
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Method
-        ////////////////////////////////////////////////////////////////////////////////////////// Private
+        #endregion 생성자 - InputPasswordForm()
 
         #region 폼 로드시 처리하기 - Form_Load(sender, e)
 
         /// <summary>
         /// 폼 로드시 처리하기
         /// </summary>
-        /// <param name="sender">이벤트 발생자</param>
-        /// <param name="e">이벤트 인자</param>
         private void Form_Load(object sender, EventArgs e)
         {
             FileInfo fileInfo = new FileInfo(@"config.ini");
@@ -95,15 +78,13 @@ namespace TestProject
             }
         }
 
-        #endregion
+        #endregion 폼 로드시 처리하기 - Form_Load(sender, e)
 
         #region OK 버튼 클릭시 처리하기 - okButton_Click(sender, e)
 
         /// <summary>
         /// OK 버튼 클릭시 처리하기
         /// </summary>
-        /// <param name="sender">이벤트 발생자</param>
-        /// <param name="e">이벤트 인자</param>
         private void okButton_Click(object sender, EventArgs e)
         {
             if(password != this.passwordTextBox.Text.Trim())
@@ -118,14 +99,13 @@ namespace TestProject
             Close();
         }
 
-        #endregion
+        #endregion OK 버튼 클릭시 처리하기 - okButton_Click(sender, e)
+
         #region 취소 버튼 클릭시 처리하기 - cancelButton_Click(sender, e)
 
         /// <summary>
         /// 취소 버튼 클릭시 처리하기
         /// </summary>
-        /// <param name="sender">이벤트 발생자</param>
-        /// <param name="e">이벤트 인자</param>
         private void cancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -133,6 +113,6 @@ namespace TestProject
             Close();
         }
 
-        #endregion
+        #endregion 취소 버튼 클릭시 처리하기 - cancelButton_Click(sender, e)
     }
 }

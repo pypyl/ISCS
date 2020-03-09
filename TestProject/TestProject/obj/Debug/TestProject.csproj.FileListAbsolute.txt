@@ -16,7 +16,6 @@ C:\Project\TestProject\TestProject\bin\Debug\TestProject.exe.config
 C:\Project\TestProject\TestProject\bin\Debug\TestProject.exe
 C:\Project\TestProject\TestProject\bin\Debug\TestProject.pdb
 C:\Project\TestProject\TestProject\obj\Debug\TestProject.csprojAssemblyReference.cache
-C:\Project\TestProject\TestProject\obj\Debug\TestProject.MainForm.resources
 C:\Project\TestProject\TestProject\obj\Debug\TestProject.InputPasswordForm.resources
 C:\Project\TestProject\TestProject\obj\Debug\TestProject.SavePasswordForm.resources
 C:\Project\TestProject\TestProject\obj\Debug\TestProject.Properties.Resources.resources
@@ -24,3 +23,5 @@ C:\Project\TestProject\TestProject\obj\Debug\TestProject.TestForm.resources
 C:\Project\TestProject\TestProject\obj\Debug\TestProject.csproj.GenerateResource.cache
 C:\Project\TestProject\TestProject\obj\Debug\TestProject.exe
 C:\Project\TestProject\TestProject\obj\Debug\TestProject.pdb
+C:\Project\TestProject\TestProject\obj\Debug\TestProject.Image.resources
+C:\Project\TestProject\TestProject\obj\Debug\TestProject.ScreenLockForm.resources

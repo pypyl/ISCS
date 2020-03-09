@@ -12,6 +12,7 @@ using System.Diagnostics;
 using Microsoft.Win32;  // registry
 
 using System.Threading;
+using System.IO;
 
 namespace TestProject
 {
@@ -20,9 +21,12 @@ namespace TestProject
         private bool flag_TaskManager;
         private bool flag_Usb;
 
-        private Thread thread = null;
-        private bool threadDoWork = true;
-        private int temp = 0;
+        private Thread thread_Regedit = null;
+        private Thread thread_USB = null;
+        private bool threadDoWork_Regedit = true;
+        private bool threadDoWork_USB = true;
+
+        private int count_Img = 0;
 
         public TestForm()
         {
@@ -62,7 +66,7 @@ namespace TestProject
 
         private void btn_ScreenLock_Click(object sender, EventArgs e)
         {
-            MainForm popup = new MainForm();
+            ScreenLockForm popup = new ScreenLockForm();
 
             popup.ShowDialog();
         }
@@ -151,6 +155,8 @@ namespace TestProject
                 registryKey.SetValue("Start", 3);
                 this.label_Usb.ForeColor = Color.Green;
                 this.label_Usb.Text = "ON";
+                this.checkBox_Usb.Enabled = true;
+
             }
             else if (flag_Usb == true)
             {
@@ -158,34 +164,44 @@ namespace TestProject
                 registryKey.SetValue("Start", 4);
                 this.label_Usb.ForeColor = Color.Red;
                 this.label_Usb.Text = "OFF";
+                
+                this.checkBox_Usb.Enabled = false;
+                this.checkBox_Usb.Checked = false;
+
+                if (this.checkBox_Usb.Checked == true)
+                {
+                    threadDoWork_USB = true;
+                    thread_USB.Interrupt();
+                    thread_USB.Join();
+                }
             }
         }
 
         private void btn_Regedit_Click(object sender, EventArgs e)
         {
-            if (threadDoWork == true)
+            if (threadDoWork_Regedit == true)
             {
-                thread = new Thread(ProcessThread);
-                threadDoWork = false;
+                thread_Regedit = new Thread(ProcessThread_Regedit);
+                threadDoWork_Regedit = false;
                 this.label_Regedit.ForeColor = Color.Red;
                 this.label_Regedit.Text = "OFF";
-                thread.IsBackground = true; // 프로그램 종료 시 스레드 종료
-                thread.Start();
+                thread_Regedit.IsBackground = true; // 프로그램 종료 시 스레드 종료
+                thread_Regedit.Start();
             }
-            else if (threadDoWork == false)
+            else if (threadDoWork_Regedit == false)
             {
-                threadDoWork = true;
+                threadDoWork_Regedit = true;
                 this.label_Regedit.ForeColor = Color.Green;
                 this.label_Regedit.Text = "ON";
 
-                thread.Interrupt();
-                thread.Join();
+                thread_Regedit.Interrupt();
+                thread_Regedit.Join();
             }
         }
 
-        private void ProcessThread()
+        private void ProcessThread_Regedit()
         {
-            while (!threadDoWork)
+            while (!threadDoWork_Regedit)
             {
                 Process[] processList = Process.GetProcessesByName("regedit");
                 if (processList.Length > 0)
@@ -195,6 +211,71 @@ namespace TestProject
                 }
                 Delay(1500);
             }
+        }
+
+        private void checkBox_Usb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBox_Usb.Checked == true)
+            {
+                thread_USB = new Thread(ProcessThread_USB);
+                threadDoWork_USB = false;
+
+                thread_USB.IsBackground = true; // 프로그램 종료 시 스레드 종료
+                thread_USB.Start();
+            }
+            else if (this.checkBox_Usb.Checked == false)
+            {
+                threadDoWork_USB = true;
+                thread_USB.Interrupt();
+                thread_USB.Join();
+            }
+        }
+
+        private void ProcessThread_USB()
+        {
+            while (!threadDoWork_USB)
+            {
+                DriveInfo[] diArray = DriveInfo.GetDrives();
+                
+                foreach (DriveInfo di in diArray)
+                {
+                    if (di.IsReady == true && di.DriveType == DriveType.Removable)
+                    {
+                        MessageBox.Show("USB 연결 확인 넌 ㅈ됐음", "헌병 출동", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                
+                Delay(1500);
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            count_Img += 1;
+            if (count_Img == 4)
+            {
+                count_Img = 0;
+                Image popup = new Image();
+                popup.Show();
+            }
+        }
+
+        private void 메뉴3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void 메뉴2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Image popup = new Image();
+            popup.Show();
+        }
+
+        private void 메뉴1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ScreenLockForm popup = new ScreenLockForm();
+
+            popup.ShowDialog();
         }
     }
 }
