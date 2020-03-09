@@ -18,6 +18,7 @@ namespace TestProject
     public partial class TestForm : Form
     {
         private bool flag_TaskManager;
+        private bool flag_Usb;
 
         public TestForm()
         {
@@ -38,7 +39,21 @@ namespace TestProject
                 this.label_TaskManager.ForeColor = Color.Red;
                 this.label_TaskManager.Text = "OFF";
             }
-          
+
+            RegistryKey registryKey_USB = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\services\USBSTOR", true);
+            if (registryKey_USB.GetValue("Start").ToString() == "3")
+            {
+                flag_Usb = true;
+                this.label_Usb.ForeColor = Color.Green;
+                this.label_Usb.Text = "ON";
+            }
+            else if (registryKey_USB.GetValue("Start").ToString() == "4")
+            {
+                flag_Usb = false;
+                this.label_Usb.ForeColor = Color.Red;
+                this.label_Usb.Text = "OFF";
+            }
+
         }
 
         private void btn_ScreenLock_Click(object sender, EventArgs e)
@@ -121,6 +136,30 @@ namespace TestProject
         private void btn_RemoveTb_Click(object sender, EventArgs e)
         {
             this.textBox_Cb.Clear();
+        }
+
+        private void btn_Usb_Click(object sender, EventArgs e)
+        {
+            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\services\USBSTOR", true);
+            if (flag_Usb == false)
+            {
+                flag_Usb = true;
+                registryKey.SetValue("Start", 3);
+                this.label_Usb.ForeColor = Color.Green;
+                this.label_Usb.Text = "ON";
+            }
+            else if (flag_Usb == true)
+            {
+                flag_Usb = false;
+                registryKey.SetValue("Start", 4);
+                this.label_Usb.ForeColor = Color.Red;
+                this.label_Usb.Text = "OFF";
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -33,7 +33,7 @@
             this.btn_ScreenLock = new System.Windows.Forms.Button();
             this.btn_TaskManager = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_Usb = new System.Windows.Forms.Button();
             this.btn_Cb = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -41,7 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label_TaskManager = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label_Usb = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -53,6 +53,7 @@
             this.textBox_Cb = new System.Windows.Forms.TextBox();
             this.label_RemoveCb = new System.Windows.Forms.Label();
             this.btn_RemoveTb = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,14 +86,15 @@
             this.button3.Text = "Regedit";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btn_Usb
             // 
-            this.button4.Location = new System.Drawing.Point(43, 371);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(144, 43);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "USB Control";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_Usb.Location = new System.Drawing.Point(43, 371);
+            this.btn_Usb.Name = "btn_Usb";
+            this.btn_Usb.Size = new System.Drawing.Size(144, 43);
+            this.btn_Usb.TabIndex = 0;
+            this.btn_Usb.Text = "USB Control";
+            this.btn_Usb.UseVisualStyleBackColor = true;
+            this.btn_Usb.Click += new System.EventHandler(this.btn_Usb_Click);
             // 
             // btn_Cb
             // 
@@ -106,7 +108,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(43, 420);
+            this.button6.Location = new System.Drawing.Point(43, 466);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(144, 43);
             this.button6.TabIndex = 0;
@@ -124,7 +126,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(43, 469);
+            this.button8.Location = new System.Drawing.Point(43, 515);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(144, 43);
             this.button8.TabIndex = 0;
@@ -134,11 +136,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(41, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(237, 12);
+            this.label1.Size = new System.Drawing.Size(194, 12);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Internal Security Controls System Ver.0.3";
+            this.label1.Text = "Internal Security Controls System";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label_TaskManager
             // 
@@ -162,23 +165,23 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "미완";
             // 
-            // label4
+            // label_Usb
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(193, 386);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 12);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "미완";
+            this.label_Usb.AutoSize = true;
+            this.label_Usb.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label_Usb.ForeColor = System.Drawing.Color.Red;
+            this.label_Usb.Location = new System.Drawing.Point(193, 386);
+            this.label_Usb.Name = "label_Usb";
+            this.label_Usb.Size = new System.Drawing.Size(31, 12);
+            this.label_Usb.TabIndex = 2;
+            this.label_Usb.Text = "OFF";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.ForeColor = System.Drawing.Color.Navy;
-            this.label5.Location = new System.Drawing.Point(193, 435);
+            this.label5.Location = new System.Drawing.Point(193, 481);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 12);
             this.label5.TabIndex = 2;
@@ -189,7 +192,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label6.ForeColor = System.Drawing.Color.Navy;
-            this.label6.Location = new System.Drawing.Point(193, 484);
+            this.label6.Location = new System.Drawing.Point(193, 530);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 12);
             this.label6.TabIndex = 2;
@@ -268,16 +271,27 @@
             this.btn_RemoveTb.UseVisualStyleBackColor = true;
             this.btn_RemoveTb.Click += new System.EventHandler(this.btn_RemoveTb_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(78, 420);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(92, 16);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = " 실시간 검사";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(271, 546);
+            this.ClientSize = new System.Drawing.Size(271, 591);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btn_RemoveTb);
             this.Controls.Add(this.textBox_Cb);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label_Usb);
             this.Controls.Add(this.label_RemoveCb);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
@@ -287,7 +301,7 @@
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.btn_Cb);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btn_Usb);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btn_TaskManager);
             this.Controls.Add(this.btn_ScreenLock);
@@ -306,7 +320,7 @@
         private System.Windows.Forms.Button btn_ScreenLock;
         private System.Windows.Forms.Button btn_TaskManager;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_Usb;
         private System.Windows.Forms.Button btn_Cb;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
@@ -314,7 +328,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_TaskManager;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label_Usb;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
@@ -326,5 +340,6 @@
         private System.Windows.Forms.TextBox textBox_Cb;
         private System.Windows.Forms.Label label_RemoveCb;
         private System.Windows.Forms.Button btn_RemoveTb;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
