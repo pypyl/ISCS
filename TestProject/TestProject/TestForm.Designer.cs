@@ -34,7 +34,7 @@
             this.btn_TaskManager = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.btn_RemoveCb = new System.Windows.Forms.Button();
+            this.btn_Cb = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -50,8 +50,9 @@
             this.메뉴2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.메뉴3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_Cb = new System.Windows.Forms.TextBox();
             this.label_RemoveCb = new System.Windows.Forms.Label();
+            this.btn_RemoveTb = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,15 +94,15 @@
             this.button4.Text = "USB Control";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // btn_RemoveCb
+            // btn_Cb
             // 
-            this.btn_RemoveCb.Location = new System.Drawing.Point(43, 102);
-            this.btn_RemoveCb.Name = "btn_RemoveCb";
-            this.btn_RemoveCb.Size = new System.Drawing.Size(144, 43);
-            this.btn_RemoveCb.TabIndex = 0;
-            this.btn_RemoveCb.Text = "Remove Clipboard";
-            this.btn_RemoveCb.UseVisualStyleBackColor = true;
-            this.btn_RemoveCb.Click += new System.EventHandler(this.btn_RemoveCb_Click);
+            this.btn_Cb.Location = new System.Drawing.Point(43, 102);
+            this.btn_Cb.Name = "btn_Cb";
+            this.btn_Cb.Size = new System.Drawing.Size(144, 43);
+            this.btn_Cb.TabIndex = 0;
+            this.btn_Cb.Text = "Remove Clipboard";
+            this.btn_Cb.UseVisualStyleBackColor = true;
+            this.btn_Cb.Click += new System.EventHandler(this.btn_RemoveCb_Click);
             // 
             // button6
             // 
@@ -239,13 +240,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "미완";
             // 
-            // textBox1
+            // textBox_Cb
             // 
-            this.textBox1.Location = new System.Drawing.Point(43, 152);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 21);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "입력하세요";
+            this.textBox_Cb.Location = new System.Drawing.Point(43, 152);
+            this.textBox_Cb.Name = "textBox_Cb";
+            this.textBox_Cb.Size = new System.Drawing.Size(144, 21);
+            this.textBox_Cb.TabIndex = 3;
+            this.textBox_Cb.Text = "입력하세요";
             // 
             // label_RemoveCb
             // 
@@ -257,12 +258,23 @@
             this.label_RemoveCb.Size = new System.Drawing.Size(0, 12);
             this.label_RemoveCb.TabIndex = 2;
             // 
+            // btn_RemoveTb
+            // 
+            this.btn_RemoveTb.Location = new System.Drawing.Point(193, 152);
+            this.btn_RemoveTb.Name = "btn_RemoveTb";
+            this.btn_RemoveTb.Size = new System.Drawing.Size(56, 22);
+            this.btn_RemoveTb.TabIndex = 4;
+            this.btn_RemoveTb.Text = "지우기";
+            this.btn_RemoveTb.UseVisualStyleBackColor = true;
+            this.btn_RemoveTb.Click += new System.EventHandler(this.btn_RemoveTb_Click);
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(271, 546);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btn_RemoveTb);
+            this.Controls.Add(this.textBox_Cb);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -274,7 +286,7 @@
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
-            this.Controls.Add(this.btn_RemoveCb);
+            this.Controls.Add(this.btn_Cb);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btn_TaskManager);
@@ -295,7 +307,7 @@
         private System.Windows.Forms.Button btn_TaskManager;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button btn_RemoveCb;
+        private System.Windows.Forms.Button btn_Cb;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
@@ -311,7 +323,8 @@
         private System.Windows.Forms.ToolStripMenuItem 메뉴2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 메뉴3ToolStripMenuItem;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_Cb;
         private System.Windows.Forms.Label label_RemoveCb;
+        private System.Windows.Forms.Button btn_RemoveTb;
     }
 }

@@ -11,6 +11,8 @@ using System.Diagnostics;
 //using System.Runtime.InteropServices;
 using Microsoft.Win32;  // registry
 
+using System.Threading;
+
 namespace TestProject
 {
     public partial class TestForm : Form
@@ -97,6 +99,28 @@ namespace TestProject
         {
             this.label_RemoveCb.Text = "제거완료"; 
             Clipboard.Clear();
+            Delay(5000);
+            this.label_RemoveCb.Text = " ";
+        }
+
+        private static DateTime Delay(int MS)
+        {
+            DateTime ThisMoment = DateTime.Now;
+            TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
+            DateTime AfterWards = ThisMoment.Add(duration);
+
+            while (AfterWards >= ThisMoment)
+            {
+                System.Windows.Forms.Application.DoEvents();
+                ThisMoment = DateTime.Now;
+            }
+
+            return DateTime.Now;
+        }
+
+        private void btn_RemoveTb_Click(object sender, EventArgs e)
+        {
+            this.textBox_Cb.Clear();
         }
     }
 }
