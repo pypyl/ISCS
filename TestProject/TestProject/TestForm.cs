@@ -20,6 +20,10 @@ namespace TestProject
         private bool flag_TaskManager;
         private bool flag_Usb;
 
+        private Thread thread = null;
+        private bool threadDoWork = true;
+        private int temp = 0;
+
         public TestForm()
         {
             InitializeComponent();
@@ -157,9 +161,40 @@ namespace TestProject
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btn_Regedit_Click(object sender, EventArgs e)
         {
+            if (threadDoWork == true)
+            {
+                thread = new Thread(ProcessThread);
+                threadDoWork = false;
+                this.label_Regedit.ForeColor = Color.Red;
+                this.label_Regedit.Text = "OFF";
+                thread.IsBackground = true; // 프로그램 종료 시 스레드 종료
+                thread.Start();
+            }
+            else if (threadDoWork == false)
+            {
+                threadDoWork = true;
+                this.label_Regedit.ForeColor = Color.Green;
+                this.label_Regedit.Text = "ON";
 
+                thread.Interrupt();
+                thread.Join();
+            }
+        }
+
+        private void ProcessThread()
+        {
+            while (!threadDoWork)
+            {
+                Process[] processList = Process.GetProcessesByName("regedit");
+                if (processList.Length > 0)
+                {
+                    processList[0].Kill();
+                    MessageBox.Show("관리자가 레지스트리 편집기를 사용하지 못하도록 했습니다.", "레지스트리 편집기", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                }
+                Delay(1500);
+            }
         }
     }
 }

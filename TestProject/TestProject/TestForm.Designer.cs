@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestForm));
             this.btn_ScreenLock = new System.Windows.Forms.Button();
             this.btn_TaskManager = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_Regedit = new System.Windows.Forms.Button();
             this.btn_Usb = new System.Windows.Forms.Button();
             this.btn_Cb = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -40,7 +40,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label_TaskManager = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label_Regedit = new System.Windows.Forms.Label();
             this.label_Usb = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,6 +54,7 @@
             this.label_RemoveCb = new System.Windows.Forms.Label();
             this.btn_RemoveTb = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,14 +78,15 @@
             this.btn_TaskManager.UseVisualStyleBackColor = true;
             this.btn_TaskManager.Click += new System.EventHandler(this.btn_TaskManager_Click);
             // 
-            // button3
+            // btn_Regedit
             // 
-            this.button3.Location = new System.Drawing.Point(43, 322);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 43);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Regedit";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_Regedit.Location = new System.Drawing.Point(43, 322);
+            this.btn_Regedit.Name = "btn_Regedit";
+            this.btn_Regedit.Size = new System.Drawing.Size(144, 43);
+            this.btn_Regedit.TabIndex = 0;
+            this.btn_Regedit.Text = "Regedit";
+            this.btn_Regedit.UseVisualStyleBackColor = true;
+            this.btn_Regedit.Click += new System.EventHandler(this.btn_Regedit_Click);
             // 
             // btn_Usb
             // 
@@ -141,7 +143,6 @@
             this.label1.Size = new System.Drawing.Size(194, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "Internal Security Controls System";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label_TaskManager
             // 
@@ -154,16 +155,16 @@
             this.label_TaskManager.TabIndex = 2;
             this.label_TaskManager.Text = "OFF";
             // 
-            // label3
+            // label_Regedit
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(193, 337);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "미완";
+            this.label_Regedit.AutoSize = true;
+            this.label_Regedit.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label_Regedit.ForeColor = System.Drawing.Color.Green;
+            this.label_Regedit.Location = new System.Drawing.Point(193, 337);
+            this.label_Regedit.Name = "label_Regedit";
+            this.label_Regedit.Size = new System.Drawing.Size(25, 12);
+            this.label_Regedit.TabIndex = 2;
+            this.label_Regedit.Text = "ON";
             // 
             // label_Usb
             // 
@@ -181,7 +182,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.ForeColor = System.Drawing.Color.Navy;
-            this.label5.Location = new System.Drawing.Point(193, 481);
+            this.label5.Location = new System.Drawing.Point(176, 421);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 12);
             this.label5.TabIndex = 2;
@@ -245,6 +246,7 @@
             // 
             // textBox_Cb
             // 
+            this.textBox_Cb.Font = new System.Drawing.Font("굴림", 9F);
             this.textBox_Cb.Location = new System.Drawing.Point(43, 152);
             this.textBox_Cb.Name = "textBox_Cb";
             this.textBox_Cb.Size = new System.Drawing.Size(144, 21);
@@ -267,7 +269,7 @@
             this.btn_RemoveTb.Name = "btn_RemoveTb";
             this.btn_RemoveTb.Size = new System.Drawing.Size(56, 22);
             this.btn_RemoveTb.TabIndex = 4;
-            this.btn_RemoveTb.Text = "지우기";
+            this.btn_RemoveTb.Text = "Clear";
             this.btn_RemoveTb.UseVisualStyleBackColor = true;
             this.btn_RemoveTb.Click += new System.EventHandler(this.btn_RemoveTb_Click);
             // 
@@ -281,6 +283,17 @@
             this.checkBox1.Text = " 실시간 검사";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(193, 481);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "미완";
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -290,11 +303,12 @@
             this.Controls.Add(this.btn_RemoveTb);
             this.Controls.Add(this.textBox_Cb);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label_Usb);
             this.Controls.Add(this.label_RemoveCb);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label_Regedit);
             this.Controls.Add(this.label_TaskManager);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button8);
@@ -302,7 +316,7 @@
             this.Controls.Add(this.button6);
             this.Controls.Add(this.btn_Cb);
             this.Controls.Add(this.btn_Usb);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btn_Regedit);
             this.Controls.Add(this.btn_TaskManager);
             this.Controls.Add(this.btn_ScreenLock);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -319,7 +333,7 @@
 
         private System.Windows.Forms.Button btn_ScreenLock;
         private System.Windows.Forms.Button btn_TaskManager;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_Regedit;
         private System.Windows.Forms.Button btn_Usb;
         private System.Windows.Forms.Button btn_Cb;
         private System.Windows.Forms.Button button6;
@@ -327,7 +341,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_TaskManager;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_Regedit;
         private System.Windows.Forms.Label label_Usb;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -341,5 +355,6 @@
         private System.Windows.Forms.Label label_RemoveCb;
         private System.Windows.Forms.Button btn_RemoveTb;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label3;
     }
 }
