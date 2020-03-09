@@ -68,14 +68,6 @@ namespace TestProject
 
                 this.passwordTextBox.Focus();
             }
-            else
-            {
-                Hide();
-
-                SavePasswordForm frm3 = new SavePasswordForm();
-
-                frm3.ShowDialog();
-            }
         }
 
         #endregion 폼 로드시 처리하기 - Form_Load(sender, e)

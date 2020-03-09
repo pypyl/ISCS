@@ -1,6 +1,6 @@
 ﻿namespace TestProject
 {
-    partial class TestForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btn_ScreenLock = new System.Windows.Forms.Button();
             this.btn_TaskManager = new System.Windows.Forms.Button();
             this.btn_Regedit = new System.Windows.Forms.Button();
@@ -246,7 +246,6 @@
             // checkBox_Usb
             // 
             this.checkBox_Usb.AutoSize = true;
-            this.checkBox_Usb.Enabled = true;
             this.checkBox_Usb.Location = new System.Drawing.Point(67, 360);
             this.checkBox_Usb.Name = "checkBox_Usb";
             this.checkBox_Usb.Size = new System.Drawing.Size(92, 16);
@@ -266,7 +265,7 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "미완성";
             // 
-            // TestForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -292,7 +291,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "TestForm";
+            this.Name = "MainForm";
             this.Text = "ISCS";
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

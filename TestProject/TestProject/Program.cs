@@ -8,10 +8,6 @@ namespace TestProject
     /// </summary>
     static class Program
     {
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Method
-        ////////////////////////////////////////////////////////////////////////////////////////// Static
-        //////////////////////////////////////////////////////////////////////////////// Private
-
         #region 프로그램 시작하기 - Main()
 
         /// <summary>
@@ -22,8 +18,7 @@ namespace TestProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TestForm());
-            //Application.Run(new MainForm());
+            Application.Run(new MainForm());
         }
 
         #endregion

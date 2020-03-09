@@ -10,6 +10,8 @@ namespace TestProject
     /// <summary>
     /// ScreenLock 폼
     /// </summary>
+    
+    // 폼 로드(=시작) 시 Form_Load 함수가 호출된다
     public partial class ScreenLockForm : Form
     {
         #region Field
@@ -23,7 +25,6 @@ namespace TestProject
         /// 후킹 ID
         /// </summary>
         private static int _hookID = 0;
-
 
         /// <summary>
         /// WH_KEYBOARD_LL
@@ -50,12 +51,6 @@ namespace TestProject
         /// </summary>
         private const int WM_SYSKEYUP = 0x0105;
 
-
-        /// <summary>
-        /// 화면 사각형
-        /// </summary>
-        private Rectangle screenRectangle = Screen.PrimaryScreen.Bounds;
-
         /// <summary>
         /// 마우스 X 좌표
         /// </summary>
@@ -66,17 +61,6 @@ namespace TestProject
         /// </summary>
         private int mouseY = 0;
 
-        /// <summary>
-        /// 스크린 세이버 중단 가능 여부
-        /// </summary>
-        private bool canStopScreenSaver = true;
-
-        /// <summary>
-        /// 난수 발생기
-        /// </summary>
-        private Random random = new Random();
-
-
         #endregion
 
         #region 키보드 저수준 후킹 구조체 - KBDLLHOOKSTRUCT
@@ -86,9 +70,6 @@ namespace TestProject
         /// </summary>
         public struct KBDLLHOOKSTRUCT
         {
-            //////////////////////////////////////////////////////////////////////////////////////////////////// Field
-            ////////////////////////////////////////////////////////////////////////////////////////// Public
-
             #region Field
 
             /// <summary>
@@ -116,9 +97,6 @@ namespace TestProject
 
         #endregion
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Delegate
-        ////////////////////////////////////////////////////////////////////////////////////////// Private
-
         #region 키보드 후킹 처리 대리자 - ProcessKeyboardHookDelegate(code, wordParameter, longParameter)
 
         /// <summary>
@@ -131,10 +109,47 @@ namespace TestProject
         private delegate int ProcessKeyboardHookDelegate(int code, int wordParameter, ref KBDLLHOOKSTRUCT longParameter);
 
         #endregion
+        #region 키보드 후킹 처리하기 - ProcessKeyboardHook(code, wordParameter, longParameter)
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Import
-        ////////////////////////////////////////////////////////////////////////////////////////// Static
-        //////////////////////////////////////////////////////////////////////////////// Private
+        /// <summary>
+        /// 키보드 후킹 처리하기
+        /// </summary>
+        /// <param name="code">코드</param>
+        /// <param name="wordParameter">WORD 매개 변수</param>
+        /// <param name="longParameter">LONG 매개 변수</param>
+        /// <returns>처리 결과</returns>
+        private static int ProcessKeyboardHook(int code, int wordParameter, ref KBDLLHOOKSTRUCT longParameter)
+        {
+            bool result = false;
+
+            switch (wordParameter)
+            {
+                case WM_KEYDOWN:
+                case WM_KEYUP:
+                case WM_SYSKEYDOWN:
+                case WM_SYSKEYUP:
+
+                    result = ((longParameter.VirtualKeyCode == 0x09) && (longParameter.Flags == 0x20)) || // Alt + Tab
+                             ((longParameter.VirtualKeyCode == 0x1B) && (longParameter.Flags == 0x20)) || // Alt + Esc
+                             ((longParameter.VirtualKeyCode == 0x1B) && (longParameter.Flags == 0x00)) || // Ctrl + Esc
+                             ((longParameter.VirtualKeyCode == 0x5B) && (longParameter.Flags == 0x01)) || // Left Windows Key
+                             ((longParameter.VirtualKeyCode == 0x5C) && (longParameter.Flags == 0x01)) || // Right Windows Key
+                             ((longParameter.VirtualKeyCode == 0x73) && (longParameter.Flags == 0x20));   // Alt + F4
+
+                    break;
+            }
+
+            if (result == true)
+            {
+                return 1;
+            }
+            else
+            {
+                return CallNextHookEx(0, code, wordParameter, ref longParameter);
+            }
+        }
+
+        #endregion
 
         #region 윈도우 후킹 설정하기 - SetWindowsHookEx(hookID, processKeyboardHookDelegate, moduleHandle, threadID)
 
@@ -187,11 +202,7 @@ namespace TestProject
         private static extern IntPtr GetModuleHandle(string modulName);
 
         #endregion
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Field
-        ////////////////////////////////////////////////////////////////////////////////////////// Static
-        //////////////////////////////////////////////////////////////////////////////// Private
-
+       
         #region 생성자 - MainForm()
 
         /// <summary>
@@ -210,53 +221,6 @@ namespace TestProject
 
         #endregion
                 
-        //////////////////////////////////////////////////////////////////////////////////////////////////// Method
-        ////////////////////////////////////////////////////////////////////////////////////////// Static
-        //////////////////////////////////////////////////////////////////////////////// Private
-        ////////////////////////////////////////////////////////////////////// Function
-
-        #region 키보드 후킹 처리하기 - ProcessKeyboardHook(code, wordParameter, longParameter)
-
-        /// <summary>
-        /// 키보드 후킹 처리하기
-        /// </summary>
-        /// <param name="code">코드</param>
-        /// <param name="wordParameter">WORD 매개 변수</param>
-        /// <param name="longParameter">LONG 매개 변수</param>
-        /// <returns>처리 결과</returns>
-        private static int ProcessKeyboardHook(int code, int wordParameter, ref KBDLLHOOKSTRUCT longParameter)
-        {
-            bool result = false;
-
-            switch(wordParameter)
-            {
-                case WM_KEYDOWN    :
-                case WM_KEYUP      :
-                case WM_SYSKEYDOWN :
-                case WM_SYSKEYUP   :
-
-                    result = ((longParameter.VirtualKeyCode == 0x09) && (longParameter.Flags == 0x20)) || // Alt + Tab
-                             ((longParameter.VirtualKeyCode == 0x1B) && (longParameter.Flags == 0x20)) || // Alt + Esc
-                             ((longParameter.VirtualKeyCode == 0x1B) && (longParameter.Flags == 0x00)) || // Ctrl + Esc
-                             ((longParameter.VirtualKeyCode == 0x5B) && (longParameter.Flags == 0x01)) || // Left Windows Key
-                             ((longParameter.VirtualKeyCode == 0x5C) && (longParameter.Flags == 0x01)) || // Right Windows Key
-                             ((longParameter.VirtualKeyCode == 0x73) && (longParameter.Flags == 0x20));   // Alt + F4
-
-                    break;
-            }
-
-            if(result == true)
-            {
-                return 1;
-            }
-            else
-            {
-                return CallNextHookEx(0, code, wordParameter, ref longParameter);
-            }
-        }
-
-        #endregion
-
         #region 폼 로드시 처리하기 - Form_Load(sender, e)
 
         /// <summary>
@@ -266,15 +230,14 @@ namespace TestProject
         /// <param name="e">이벤트 인자</param>
         public void Form_Load(object sender, EventArgs e)
         {
-            this.canStopScreenSaver = false;
+            DisableTaskManager();                               // 작업관리자 비활성화
+            _hookID = SetHook(_processKeyboardHookDelegate);    // 키보드 후킹 활성화
 
-            DisableTaskManager();
-            _hookID = SetHook(_processKeyboardHookDelegate);
-
-            StopScreenSaver();
+            StopScreenSaver();                                  // 비밀번호 입력 폼 로드
         }
 
         #endregion
+
         #region 폼 클릭시 처리하기 - Form_Click(sender, e)
 
         /// <summary>
@@ -336,12 +299,10 @@ namespace TestProject
 
         #endregion
 
-        ////////////////////////////////////////////////////////////////////// Function
-
-        #region 태스크 관리자 비활성화 하기 - DisableTaskManager()
+        #region 작업 관리자 비활성화 하기 - DisableTaskManager()
 
         /// <summary>
-        /// 태스크 관리자 비활성화 하기
+        /// 작업 관리자 비활성화 하기
         /// </summary>
         /// <remarks>Ctrl + Alt + Delete 키 입력을 거부한다.</remarks>
         public static void DisableTaskManager()
@@ -363,10 +324,10 @@ namespace TestProject
         }
 
         #endregion
-        #region 태스크 관리자 활성화 하기 - EnableTaskManager()
+        #region 작업 관리자 활성화 하기 - EnableTaskManager()
 
         /// <summary>
-        /// 태스크 관리자 활성화 하기
+        /// 작업 관리자 활성화 하기
         /// </summary>
         /// <remarks>Ctrl + Alt + Delete 키 입력을 허용한다.</remarks>
         public static void EnableTaskManager()
@@ -389,6 +350,7 @@ namespace TestProject
         }
 
         #endregion
+
         #region 후킹 설정하기 - SetHook(processKeyboardHookDelegate)
 
         /// <summary>
@@ -415,37 +377,17 @@ namespace TestProject
         /// </summary>
         private void StopScreenSaver()
         {
-            if(this.canStopScreenSaver == true)
-            {
-                Cursor.Show();
-                UnhookWindowsHookEx(_hookID);
-                EnableTaskManager();
-                Application.Exit();
-            }
-            else
-            {
-                Cursor.Show();
-                InputPasswordForm popup = new InputPasswordForm();
+            InputPasswordForm popup = new InputPasswordForm();      // InputPasswordForm.cs의 폼을 실행
     
-                if(popup.ShowDialog() == DialogResult.OK)
-                {
-                    UnhookWindowsHookEx(_hookID);
-                    EnableTaskManager();
-                    this.Close();
-                    //Application.ExitThread();
-                    //popup.Close();
-                    //this.Close();
-                }
-                else
-                { 
-                    Cursor.Hide();
-
-                    this.mouseX = 0;
-                    this.mouseY = 0;
-                }
+            if(popup.ShowDialog() == DialogResult.OK)               // 비밀번호 입력 폼을 띄우는데 확인버튼 클릭 시
+            {
+                UnhookWindowsHookEx(_hookID);                       // 키보드 후킹 비활성화
+                EnableTaskManager();                                // 작업관리자 활성화
+                this.Close();                                       // ScreenLock 종료
             }
         }
 
         #endregion
+
     }
 }
